@@ -1,6 +1,13 @@
 package com.eteration.simplebanking.model;
 
+import com.eteration.simplebanking.model.database.entity.Transaction;
+import lombok.*;
 
-// This class is a place holder you can change the complete implementation
-public class DepositTransaction  {
+@Getter
+@Setter
+@Builder
+public class DepositTransaction extends Transaction {
+    public DepositTransaction(double v) {
+        super();
+    }
 }

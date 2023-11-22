@@ -1,8 +1,16 @@
 package com.eteration.simplebanking.model;
 
+import com.eteration.simplebanking.model.database.entity.Transaction;
+import jakarta.persistence.Entity;
+import lombok.*;
 
-// This class is a place holder you can change the complete implementation
-public class WithdrawalTransaction {
+@Getter
+@Setter
+@Builder
+public class WithdrawalTransaction extends Transaction {
+    public WithdrawalTransaction(double v) {
+        super();
+    }
 }
 
 
