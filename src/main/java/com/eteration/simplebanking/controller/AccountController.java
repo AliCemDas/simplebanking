@@ -32,12 +32,12 @@ public class AccountController {
     //Method that allows money to be withdrawn from the account whose account number is given.
     @PostMapping("/credit/{accountnumber}")
     public ResponseEntity<ResponseDto> credit(@PathVariable String accountnumber,@RequestBody @Valid WithdrawalTransaction withdrawalTransaction) throws InsufficientBalanceException, ServiceException {
-        return new ResponseEntity<>(accountService.credit(accountnumber, withdrawalTransaction.amount), HttpStatus.OK);
+        return new ResponseEntity<>(accountService.credit(accountnumber, withdrawalTransaction.getAmount()), HttpStatus.OK);
     }
 
     //Method that allows money to be deposited into the account whose account number is given.
     @PostMapping("/debit/{accountnumber}")
     public ResponseEntity<ResponseDto> debit(@PathVariable String accountnumber,@RequestBody @Valid DepositTransaction depositTransaction) throws ServiceException {
-        return new ResponseEntity<>(accountService.debit(accountnumber, depositTransaction.amount), HttpStatus.OK);
+        return new ResponseEntity<>(accountService.debit(accountnumber, depositTransaction.getAmount()), HttpStatus.OK);
     }
 }

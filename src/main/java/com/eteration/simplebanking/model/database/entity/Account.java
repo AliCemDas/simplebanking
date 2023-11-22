@@ -5,9 +5,11 @@ package com.eteration.simplebanking.model.database.entity;
 
 import com.eteration.simplebanking.model.BillPaymentTransaction;
 import com.eteration.simplebanking.model.WithdrawalTransaction;
-import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -15,18 +17,25 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-//@Table(name="\"account\"")
+@Table(name = "\"account\"")
 @Entity
 public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     public Long id;
-    public  String owner;
-    public  String accountNumber;
+    @Column(name = "owner")
+    public String owner;
+    @Column(name = "accountNumber")
+    public String accountNumber;
+    @Column(name = "createDate")
     public Date createDate;
-    public  Double balance;
-    @OneToMany(mappedBy = "account",fetch = FetchType.LAZY)
+    @Column(name = "balance")
+    public Double balance;
+
+
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     public List<Transaction> transactions;
 
 
@@ -35,10 +44,9 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
-    public void post(Transaction transaction){
-        if(transaction instanceof WithdrawalTransaction || transaction instanceof BillPaymentTransaction){
+    public void post(Transaction transaction) {
+        if (transaction instanceof WithdrawalTransaction || transaction instanceof BillPaymentTransaction) {
             setBalance(-transaction.getAmount());
-        }
-        else setBalance(+transaction.getAmount());
+        } else setBalance(+transaction.getAmount());
     }
 }
