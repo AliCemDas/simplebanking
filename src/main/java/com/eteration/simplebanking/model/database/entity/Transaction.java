@@ -4,13 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Getter
 @Setter
-@MappedSuperclass
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="\"transaction\"")
@@ -26,10 +26,15 @@ public abstract class Transaction {
     public Double amount;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id",referencedColumnName = "id")
+    @JoinColumn(name = "account_id", referencedColumnName = "id", insertable = false, updatable = false)
     public Account account;
 
     public Transaction(Double amount) {
+        this.amount = amount;
+    }
+
+    public Transaction( Double amount,Date date ) {
+        this.date = date;
         this.amount = amount;
     }
 }
